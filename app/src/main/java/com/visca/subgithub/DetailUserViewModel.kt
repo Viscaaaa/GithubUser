@@ -7,11 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.visca.subgithub.data.ApiConfig
 import com.visca.subgithub.data.ResponseDetail
+import com.visca.subgithub.repository.FavRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailUserViewModel(mApplication: Application) : ViewModel() {
+class DetailUserViewModel : ViewModel() {
+
+
     private val _user = MutableLiveData<ResponseDetail?>()
     val user: LiveData<ResponseDetail?> = _user
 

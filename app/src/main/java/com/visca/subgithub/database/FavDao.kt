@@ -9,12 +9,17 @@ import androidx.room.Query
 
 @Dao
 interface FavDao {
-    @Query("SELECT * FROM favorite_users ORDER BY username DESC")
+    @Query("SELECT * FROM favorite_users")
     fun getFavorites(): LiveData<List<FavEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertFavorite(favorite: FavEntity)
 
-    @Delete
-    fun deleteFavorite(favorite: FavEntity)
+    @Query("DELETE FROM favorite_users WHERE favorite_users.id = :id")
+    fun deleteFavorite(id : Int)
+
+    @Query("SELECT EXISTS(SELECT * FROM favorite_users WHERE favorite_users.id = :id)")
+    fun isUserFav(id: Int): Int
+
+
 }

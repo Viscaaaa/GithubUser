@@ -24,7 +24,9 @@ class FavRepository (application: Application) {
         executorService.execute { mFavoriteDao.insertFavorite(favorite) }
     }
 
-    fun delete(favorite: FavEntity) {
-        executorService.execute { mFavoriteDao.deleteFavorite(favorite) }
+    fun delete(id: Int) {
+        executorService.execute { mFavoriteDao.deleteFavorite(id) }
     }
+
+    fun checkFavorite(id : Int) = mFavoriteDao.isUserFav(id)
 }

@@ -24,6 +24,8 @@ class UserAdapter(private val activity: Activity) : ListAdapter<ItemsItem, UserA
         holder.itemView.setOnClickListener{
             val moveUserDataIntent = Intent(holder.itemView.context, DetailUser::class.java)
             moveUserDataIntent.putExtra(DetailUser.USERNAME, user.login)
+            moveUserDataIntent.putExtra(DetailUser.USER_IMAGE,user.avatarUrl)
+            moveUserDataIntent.putExtra(DetailUser.id,user.id)
             activity.startActivity(moveUserDataIntent)
         }
     }

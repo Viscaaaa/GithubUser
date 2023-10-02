@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.visca.subgithub.data.ResponseDetail
 import com.visca.subgithub.database.FavEntity
 import com.visca.subgithub.repository.FavRepository
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class FavViewModel (application: Application): ViewModel() {
     private val mFavoriteRepository: FavRepository = FavRepository(application)
@@ -14,31 +16,23 @@ class FavViewModel (application: Application): ViewModel() {
     val thisFavorite : LiveData<Boolean> = _thisFavorite
     private val _user = MutableLiveData<ResponseDetail?>()
     val user: LiveData<ResponseDetail?> = _user
+    private val executorService : ExecutorService = Executors.newSingleThreadExecutor()
 
-    fun getAllFavorite(): LiveData<List<FavEntity>> = mFavoriteRepository.getAllFavorite()
+
+    fun getAllFavorite(): LiveData<List<FavEntity>> {
+        return mFavoriteRepository.getAllFavorite()
+    }
 
 
-    fun setThisFavorite(thisFavorite:Boolean){
-        _thisFavorite.value = thisFavorite
+    fun checkFavorite(id : Int) = mFavoriteRepository.checkFavorite(id)
+
+    fun insert(user : FavEntity ){
+        mFavoriteRepository.insert(user)
+    }
+
+    fun delete(id: Int) {
+        mFavoriteRepository.delete(id)
+    }
 
     }
 
-    fun insertFavorite(thisFavorite: FavEntity){
-        setThisFavorite(true)
-        mFavoriteRepository.insert(thisFavorite)
-    }
-
-    fun deleteFavorite(thisFavorite: FavEntity){
-        setThisFavorite(false)
-        mFavoriteRepository.delete(thisFavorite)
-
-    }
-
-    fun  updateFavorite(favorited: FavEntity){
-        if (thisFavorite.value != true){
-            insertFavorite(favorited)
-        } else {
-            deleteFavorite(favorited)
-        }
-    }
-}

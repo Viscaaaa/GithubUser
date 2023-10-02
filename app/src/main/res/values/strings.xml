@@ -6,4 +6,6 @@
     <string name="follower">Follower</string>
     <string name="following">Following</string>
     <string name="favorite">Favorite</string>
+    <string name="menu_1">Menu 1</string>
+    <string name="menu_2">Menu 2</string>
 </resources>

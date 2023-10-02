@@ -22,9 +22,7 @@ class ViewModelFactory private constructor(private val mApplication: Application
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DetailUserViewModel::class.java)) {
-            return DetailUserViewModel(mApplication) as T
-        } else if (modelClass.isAssignableFrom(FavViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(FavViewModel::class.java)) {
             return FavViewModel(mApplication) as T
         }
 
